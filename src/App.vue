@@ -2,23 +2,35 @@
   <v-app>
     <v-main>
       <template>
-        <v-container>
-          <v-data-table
-            :headers="header"
-            :items="data"
-            :items-per-page="5"
-            item-key="id"
-            disable-sort
-            hide-default-footer
-            class="elevation-1"
-          ></v-data-table>
-        </v-container>
+        <v-app-bar elevate-on-scroll elevation="4">
+          <v-app-bar-title>RealEstate Trade System(부동산 실거래 조회)</v-app-bar-title>
+          <v-spacer />
+
+          <template #extension>
+            <v-tabs fixed-tabs background-color="secondary">
+              <v-tabs-slider color="red lighten-1" />
+              <v-tab :to="{ name: 'Apartment' }" class="text-body-1">
+                <v-icon left>mdi-office-building</v-icon>아파트
+              </v-tab>
+              <v-tab :to="{ name: 'MultiFamily' }" class="text-body-1">
+                <v-icon left>mdi-home-group</v-icon>연립/다세대
+              </v-tab>
+              <v-tab :to="{ name: 'MultiHouse' }" class="text-body-1">
+                <v-icon left>mdi-home</v-icon>단독/다가구
+              </v-tab>
+              <v-tab :to="{ name: 'Officetel' }" class="text-body-1">
+                <v-icon left>mdi-city-variant</v-icon>오피스텔
+              </v-tab>
+            </v-tabs>
+          </template>
+        </v-app-bar>
       </template>
     </v-main>
 
     <v-main>
       <router-view />
     </v-main>
+    <v-footer app dark class="justify-end text-body-2">부동산 실거래 조회 시스템 Develope v1.0</v-footer>
   </v-app>
 </template>
 
@@ -33,10 +45,11 @@ export default {
       key:
         "bx5Feaub8FfLGLBgQkewGgIrdf5hJaqr%2FGqudrfyCZ7lwc%2FkzoAozvFaT5GXf0CvycvgvbaJC5dgpRS1m%2Fdzog%3D%3D",
       data: [],
-      header: [{ text: "region_cd", value: "region_cd" }]
+      header: [{ text: "region_cd", value: "region_cd" }],
+      PageNo: 1
     };
   },
-  created() {
+  mounted() {
     this.testGet();
   },
   methods: {
@@ -47,8 +60,8 @@ export default {
         )
         .then(
           a => (
-            (this.data = a.data.StanReginCd.row),
-            console.log(a.data.StanReginCd.row[0])
+            (this.data = a.data.StanReginCd[1].row),
+            console.log(a.data.StanReginCd[1].row[0].region_cd)
           )
         );
     }
