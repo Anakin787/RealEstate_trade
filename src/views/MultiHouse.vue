@@ -1,5 +1,5 @@
 <template>
-  <div>Multihouse</div>
+  <div>Multihouse(다가구)</div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div>MultiFamily</div>
+  <div>MultiFamily(다세대)</div>
 </template>
 
 <script>

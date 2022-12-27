@@ -8,11 +8,14 @@
 
           <template #extension>
             <v-tabs fixed-tabs background-color="secondary">
+              <!-- service key공통 -->
               <v-tabs-slider color="red lighten-1" />
               <v-tab :to="{ name: 'Apartment' }" class="text-body-1">
+                <!-- 지역코드 , 월단위 , PageNo , PageRows -->
                 <v-icon left>mdi-office-building</v-icon>아파트
               </v-tab>
               <v-tab :to="{ name: 'MultiFamily' }" class="text-body-1">
+                <!-- 지역코드 , 월단위 이하 동일 -->
                 <v-icon left>mdi-home-group</v-icon>연립/다세대
               </v-tab>
               <v-tab :to="{ name: 'MultiHouse' }" class="text-body-1">
@@ -36,7 +39,6 @@
 
 <script>
 import axios from "axios";
-
 export default {
   name: "App",
 
@@ -45,7 +47,7 @@ export default {
       key:
         "bx5Feaub8FfLGLBgQkewGgIrdf5hJaqr%2FGqudrfyCZ7lwc%2FkzoAozvFaT5GXf0CvycvgvbaJC5dgpRS1m%2Fdzog%3D%3D",
       data: [],
-      header: [{ text: "region_cd", value: "region_cd" }],
+      header: [{ text: "거래금액", value: "거래금액" }],
       PageNo: 1
     };
   },
@@ -56,13 +58,13 @@ export default {
     testGet() {
       axios
         .get(
-          `https://apis.data.go.kr/1741000/StanReginCd/getStanReginCdList?serviceKey=${this.key}&pageNo=1&numOfRows=3&type=json&locatadd_nm=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C`
+          `http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcRHTrade?serviceKey=bx5Feaub8FfLGLBgQkewGgIrdf5hJaqr%2FGqudrfyCZ7lwc%2FkzoAozvFaT5GXf0CvycvgvbaJC5dgpRS1m%2Fdzog%3D%3D&LAWD_CD=11110&DEAL_YMD=201512&type=json`
         )
         .then(
-          a => (
-            (this.data = a.data.StanReginCd[1].row),
-            console.log(a.data.StanReginCd[1].row[0].region_cd)
-          )
+          a => {
+            (this.data = a.data.body), console.log(a.data);
+          }
+          // console.log(a.data.StanReginCd[1].row[0].region_cd)
         );
     }
   }
