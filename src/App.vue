@@ -28,6 +28,9 @@
           </template>
         </v-app-bar>
       </template>
+
+      
+
     </v-main>
 
     <v-main>
@@ -61,8 +64,8 @@ export default {
           `http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcRHTrade?serviceKey=bx5Feaub8FfLGLBgQkewGgIrdf5hJaqr%2FGqudrfyCZ7lwc%2FkzoAozvFaT5GXf0CvycvgvbaJC5dgpRS1m%2Fdzog%3D%3D&LAWD_CD=11110&DEAL_YMD=201512&type=json`
         )
         .then(
-          a => {
-            (this.data = a.data.body), console.log(a.data);
+          res => {
+            (this.data = res.data.body), console.log(res.data);
           }
           // console.log(a.data.StanReginCd[1].row[0].region_cd)
         );
